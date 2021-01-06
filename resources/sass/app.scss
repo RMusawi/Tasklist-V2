@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish&display=swap');
+* {
+    font-family: 'Mulish', sans-serif;
+    margin: 0;
+    .root {
+        display: flex;
+        justify-content: center;
+        .container {
+            background-color: #fbfffc;
+            padding-bottom: 60px;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            box-shadow:
+                0 2.8px 2.2px rgba(0, 0, 0, 0.02),
+                0 6.7px 5.3px rgba(0, 0, 0, 0.028),
+                0 12.5px 10px rgba(0, 0, 0, 0.035),
+                0 22.3px 17.9px rgba(0, 0, 0, 0.042),
+                0 41.8px 33.4px rgba(0, 0, 0, 0.05),
+                0 100px 80px rgba(0, 0, 0, 0.07);
+
+            .top {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                .title {
+                    color: #424242;
+                    text-align: center;
+                    margin-top: 10px;
+                    margin-bottom: 20px;
+                }
+
+                .inputArea {
+                    min-width: 500px;
+                    height: 80px;
+                    margin-left: 10px;
+                    margin-right: 10px;
+                    background-color: #424242;
+                    border: none;
+                    border-radius: 10px;
+                    color: #ffffff;
+                    padding-left: 10px;
+                    font-size: x-large;
+                }
+
+                .inputArea::placeholder {
+                    color: #ffffff;
+                    opacity: 40%;
+                }
+
+                .inputArea:focus {
+                    transition-duration: .5s;
+                    outline: none !important;
+                    box-shadow: 0 0 10px #424242;
+                }
+
+                .inputArea:hover {
+                    background-color: #646464;
+                    transition: ease-in-out;
+                    transition-duration: .5s;
+                }
+
+                .addButton {
+                    margin-top: 20px;
+                    width: 200px;
+                    height: 40px;
+                    font-size: medium;
+                    background-color: #424242;
+                    border-radius: 10px;
+                    border: none;
+                    color: #ffffff;
+                }
+
+                .addButton:focus {
+                    outline: none !important;
+                }
+
+                .addButton:hover {
+                    background-color: #ffffff;
+                    cursor: pointer;
+                    border: 2px solid #424242;
+                    color: #424242;
+                }
+
+            }
+
+            .middle {
+                margin-top: 20px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                height: auto;
+
+                .checkAndItem {
+                    .item {
+                        margin: 10px;
+                        color: #424242;
+                        font-size: 25px;
+                        width: 100%;
+                        height: 100%;
+
+                        p {
+                            text-align: center;
+                            word-break: break-all;
+                        }
+                    }
+                }
+
+                .buttons {
+                    display: flex;
+                    margin-top: 20px;
+                    justify-content: center;
+                    max-height: 20px;
+                    width: 100%;
+                    .editButton {
+                        width: 75px;
+                        height: 40px;
+                        margin-right: 20px;
+                        font-size: medium;
+                        background-color: #424242;
+                        border-radius: 10px;
+                        border: none;
+                        color: #ffffff;
+                    }
+
+                    .editButton:focus {
+                        outline: none !important;
+                    }
+
+                    .editButton:hover {
+                        background-color: #002f6c;
+                        cursor: pointer;
+                    }
+                    .deleteButton {
+                        width: 75px;
+                        height: 40px;
+                        font-size: medium;
+                        background-color: #424242;
+                        border-radius: 10px;
+                        border: none;
+                        color: #ffffff;
+                    }
+
+                    .deleteButton:focus {
+                        outline: none !important;
+                    }
+
+                    .deleteButton:hover {
+                        background-color: #9b0000;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+    .stripe {
+        margin-top: 20px;
+        background-color: #424242;
+    }
+    .item-container{
+        padding: 10px;
+    }
+    .CheckContainer {
+        display: flex;
+        align-items: center;
+        .checkbox {
+            width: 30px;
+            height: 30px;
+            margin-right: 20px;
+            margin-top: 5px;
+        }
+    }
+    .checkbox-null {
+        text-decoration: none;
+    }
+
+    .checkbox-done {
+        text-decoration: line-through;
+        text-decoration-color: rebeccapurple;
+    }
+
+    .grow { transition: all .2s ease-in-out; }
+    .grow:hover { transform: scale(1.1); }
+}
