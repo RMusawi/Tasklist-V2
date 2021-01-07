@@ -102,6 +102,21 @@
                         p {
                             text-align: center;
                             word-break: break-all;
+                            cursor: default;
+                        }
+
+                        .edit-input {
+                            background: none;
+                            color: #002f6c;
+                            width: 100%;
+                            font-size: 25px;
+                            text-align: center;
+                            word-break: break-all;
+                            border: none;
+
+                        }
+                        .edit-input:focus {
+                            outline: none !important;
                         }
                     }
                 }
@@ -153,6 +168,7 @@
             }
         }
     }
+
     .stripe {
         margin-top: 20px;
         background-color: #424242;

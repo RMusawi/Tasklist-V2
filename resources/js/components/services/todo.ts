@@ -34,11 +34,12 @@ export const postDataAxios = async(inputText) => {
         })
 }
 
-export const editDataAxios = async(inputText) => {
-    const url = env + edit;
+export const editDataAxios = async(inputText, id) => {
+    const url = `${env}/activities/${id}`;
     return axios.patch(url,
         {activity_name: inputText})
-        .then(() => {
+        .then((response) => {
+            console.log(response.data);
             getDataAxios()
         })
         .catch(() => {
@@ -52,7 +53,6 @@ export const destroyDataAxios = async(id) => {
 }
 
 export const checkDataAxios = async(id, value) => {
-    // console.log("boba")
     const url = `${env}/${check}/${id}`;
 
     return axios.patch(url,

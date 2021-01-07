@@ -27,8 +27,11 @@ const Container: React.FunctionComponent<any> = () => {
         )
     }
 
-    const handleEdit = (id) => {
-        editDataAxios(id).then(() => {
+    const handleEdit = (e,inputText, id) => {
+        e.preventDefault();
+        // if (!inputText)
+        //     alert("You can't edit your task to empty. There's a Delete button for that.");
+        editDataAxios(inputText, id).then(() => {
             getDataAxios().then((todos) => setActivities(todos))
         })
     }
@@ -58,7 +61,18 @@ const Container: React.FunctionComponent<any> = () => {
                 </div>
                 <div className="middle">
                     <div className="checkAndItem">
-                        <Item activities={activities} destroy={handleDelete} edit={handleEdit} check={handleChecked}/>
+                        {!activities.length && (<div className="item">
+                            <p className="todo-item">Your activities will show up here.</p>
+                        </div>)}
+                        {activities.length > 0 && activities.map((activity, index) => (
+                        <Item
+                            key={index}
+                            activity={activity}
+                            destroy={handleDelete}
+                            edit={handleEdit}
+                            check={handleChecked}
+                        />
+                        ))}
                     </div>
                 </div>
             </div>

@@ -33042,8 +33042,11 @@ var Container = function Container() {
     });
   };
 
-  var handleEdit = function handleEdit(id) {
-    Object(_services_todo__WEBPACK_IMPORTED_MODULE_4__["editDataAxios"])(id).then(function () {
+  var handleEdit = function handleEdit(e, inputText, id) {
+    e.preventDefault(); // if (!inputText)
+    //     alert("You can't edit your task to empty. There's a Delete button for that.");
+
+    Object(_services_todo__WEBPACK_IMPORTED_MODULE_4__["editDataAxios"])(inputText, id).then(function () {
       Object(_services_todo__WEBPACK_IMPORTED_MODULE_4__["getDataAxios"])().then(function (todos) {
         return setActivities(todos);
       });
@@ -33100,11 +33103,18 @@ var Container = function Container() {
     className: "middle"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "checkAndItem"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Item__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    activities: activities,
-    destroy: handleDelete,
-    edit: handleEdit,
-    check: handleChecked
+  }, !activities.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "item"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+    className: "todo-item"
+  }, "Your activities will show up here.")), activities.length > 0 && activities.map(function (activity, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Item__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      key: index,
+      activity: activity,
+      destroy: handleDelete,
+      edit: handleEdit,
+      check: handleChecked
+    });
   })))));
 };
 
@@ -33150,13 +33160,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
 
-var EditButton = function EditButton(edit) {
+var EditButton = function EditButton(props) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     type: "button",
     className: "editButton grow",
-    onClick: function onClick() {
-      return edit(true);
-    }
+    onClick: props.onClick
   }, "Edit"));
 };
 
@@ -33196,7 +33204,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var Item = function Item(_ref) {
-  var activities = _ref.activities,
+  var activity = _ref.activity,
       destroy = _ref.destroy,
       edit = _ref.edit,
       check = _ref.check;
@@ -33206,44 +33214,50 @@ var Item = function Item(_ref) {
       editActive = _useState2[0],
       setEditActive = _useState2[1];
 
-  if (activities.length > 0) {
-    return activities.map(function (activity, index) {
-      var style = "todo-item " + (activity.checked ? 'checkbox-done' : 'checkbox-null');
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "item-container",
-        key: index
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
-        className: "stripe"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "item",
-        key: activity.id
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: style
-      }, activity.activity_name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "buttons"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CheckBox__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        onClick: function onClick() {
-          return check(activity.id);
-        },
-        checked: activity.checked
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_EditButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        onClick: function onClick() {
-          return edit(activity.id);
-        } //() => edit(activity.activity_name)
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+      _useState4 = _slicedToArray(_useState3, 2),
+      inputText = _useState4[0],
+      setInputText = _useState4[1];
 
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DeleteButton__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        onClick: function onClick() {
-          return destroy(activity.id);
-        }
-      })));
-    });
-  } else {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "item"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-      className: "todo-item"
-    }, "Your activities will show up here."));
-  }
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    setInputText(activity.activity_name);
+  }, [activity]);
+  var style = "todo-item " + (activity.checked ? 'checkbox-done' : 'checkbox-null');
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "item-container"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+    className: "stripe"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "item",
+    key: activity.id
+  }, editActive ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    onSubmit: function onSubmit(e) {
+      return edit(e, inputText, activity.id);
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    className: "edit-input",
+    value: inputText,
+    onChange: function onChange(e) {
+      return setInputText(e.target.value);
+    }
+  })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: style
+  }, activity.activity_name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "buttons"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CheckBox__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    onClick: function onClick() {
+      return check(activity.id);
+    },
+    checked: activity.checked
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_EditButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    onClick: function onClick() {
+      return setEditActive(true);
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DeleteButton__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    onClick: function onClick() {
+      return destroy(activity.id);
+    }
+  })));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Item);
@@ -33338,16 +33352,17 @@ var postDataAxios = /*#__PURE__*/function () {
   };
 }();
 var editDataAxios = /*#__PURE__*/function () {
-  var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(inputText) {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(inputText, id) {
     var url;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
-            url = env + edit;
+            url = "".concat(env, "/activities/").concat(id);
             return _context3.abrupt("return", axios__WEBPACK_IMPORTED_MODULE_1___default.a.patch(url, {
               activity_name: inputText
-            }).then(function () {
+            }).then(function (response) {
+              console.log(response.data);
               getDataAxios();
             })["catch"](function () {
               console.log("Oops, edit failed!");
@@ -33361,7 +33376,7 @@ var editDataAxios = /*#__PURE__*/function () {
     }, _callee3);
   }));
 
-  return function editDataAxios(_x2) {
+  return function editDataAxios(_x2, _x3) {
     return _ref3.apply(this, arguments);
   };
 }();
@@ -33383,7 +33398,7 @@ var destroyDataAxios = /*#__PURE__*/function () {
     }, _callee4);
   }));
 
-  return function destroyDataAxios(_x3) {
+  return function destroyDataAxios(_x4) {
     return _ref4.apply(this, arguments);
   };
 }();
@@ -33394,7 +33409,6 @@ var checkDataAxios = /*#__PURE__*/function () {
       while (1) {
         switch (_context5.prev = _context5.next) {
           case 0:
-            // console.log("boba")
             url = "".concat(env, "/").concat(check, "/").concat(id);
             return _context5.abrupt("return", axios__WEBPACK_IMPORTED_MODULE_1___default.a.patch(url, {
               checked: value
@@ -33412,7 +33426,7 @@ var checkDataAxios = /*#__PURE__*/function () {
     }, _callee5);
   }));
 
-  return function checkDataAxios(_x4, _x5) {
+  return function checkDataAxios(_x5, _x6) {
     return _ref5.apply(this, arguments);
   };
 }();

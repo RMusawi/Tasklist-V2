@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Item;
 use App\Models\Activity;
 use Illuminate\Http\Request;
 
@@ -41,9 +40,9 @@ class ActivitiesController extends Controller
 
     public function update(Request $request, Activity $activity)
     {
-
         $activity->activity_name = $request->input('activity_name');
         $activity->save();
+
 
         return response()->json([
             'data' => [
