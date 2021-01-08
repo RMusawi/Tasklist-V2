@@ -146,6 +146,27 @@
                         background-color: #002f6c;
                         cursor: pointer;
                     }
+
+                    .cancelButton {
+                        width: 75px;
+                        height: 40px;
+                        margin-right: 20px;
+                        font-size: medium;
+                        background-color: #424242;
+                        border-radius: 10px;
+                        border: none;
+                        color: #ffffff;
+                    }
+
+                    .cancelButton:focus {
+                        outline: none !important;
+                    }
+
+                    .cancelButton:hover {
+                        background-color: #ff7f50;
+                        cursor: pointer;
+                    }
+
                     .deleteButton {
                         width: 75px;
                         height: 40px;

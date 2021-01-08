@@ -126,6 +126,23 @@
   background-color: #002f6c;
   cursor: pointer;
 }
+* .root .container .middle .buttons .cancelButton {
+  width: 75px;
+  height: 40px;
+  margin-right: 20px;
+  font-size: medium;
+  background-color: #424242;
+  border-radius: 10px;
+  border: none;
+  color: #ffffff;
+}
+* .root .container .middle .buttons .cancelButton:focus {
+  outline: none !important;
+}
+* .root .container .middle .buttons .cancelButton:hover {
+  background-color: #ff7f50;
+  cursor: pointer;
+}
 * .root .container .middle .buttons .deleteButton {
   width: 75px;
   height: 40px;

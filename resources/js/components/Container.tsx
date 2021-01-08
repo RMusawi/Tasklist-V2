@@ -24,13 +24,12 @@ const Container: React.FunctionComponent<any> = () => {
         destroyDataAxios(id).then(() => {
                 getDataAxios().then((todos) => setActivities(todos))
             }
+
         )
     }
 
     const handleEdit = (e,inputText, id) => {
         e.preventDefault();
-        // if (!inputText)
-        //     alert("You can't edit your task to empty. There's a Delete button for that.");
         editDataAxios(inputText, id).then(() => {
             getDataAxios().then((todos) => setActivities(todos))
         })
