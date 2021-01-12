@@ -1,16 +1,11 @@
-import React, {useState} from "react";
+import React from "react";
 
 const EditButton: React.FunctionComponent<any> = (props) => {
-    const buttonClick = (editing) => {
-        props.onClick()
-        setEditing(editing)
-    }
-    const [editing, setEditing] = useState(false);
     return (
         <div>
-            {!editing
-                ? <button type="button" className="editButton grow" onClick={() => buttonClick(true)}>Edit</button>
-                : <button type="button" className="cancelButton grow" onClick={() => buttonClick(false)}>Cancel</button>
+            {props.isEditing
+                ? <button type="submit" className="exitButton grow" onClick={props.onClick}>Exit</button>
+                : <button type="submit" className="editButton grow" onClick={props.onClick}>Edit</button>
             }
         </div>
     )

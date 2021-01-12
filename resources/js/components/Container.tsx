@@ -54,8 +54,15 @@ const Container: React.FunctionComponent<any> = () => {
             <div className="container">
                 <div className="top">
                     <h1 className="title">What do we need to do?</h1>
-                    <form onSubmit={handleSubmit}><input type="text" className="inputArea" placeholder="Example: Empty the dishwasher" value={inputText}
-                                 onChange={e => setInputText(e.target.value)}/></form>
+                    <form onSubmit={handleSubmit}>
+                        <input type="text"
+                               className="inputArea"
+                               placeholder="Example: Empty the dishwasher"
+                               value={inputText}
+                               onChange={e => setInputText(e.target.value)}
+                               ref={input => input && input.focus()}
+                        />
+                    </form>
                     <AddButton onClick={handleSubmit} />
                 </div>
                 <div className="middle">

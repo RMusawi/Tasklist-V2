@@ -6,6 +6,7 @@
         display: flex;
         justify-content: center;
         .container {
+            padding-right: 30px;
             background-color: #fbfffc;
             padding-bottom: 60px;
             border-bottom-left-radius: 20px;
@@ -112,11 +113,16 @@
                             font-size: 25px;
                             text-align: center;
                             word-break: break-all;
-                            border: none;
+                            border-style: dashed;
+                            border-width: medium;
 
                         }
                         .edit-input:focus {
                             outline: none !important;
+                        }
+
+                        .tip {
+                            font-size: 18px;
                         }
                     }
                 }
@@ -147,7 +153,7 @@
                         cursor: pointer;
                     }
 
-                    .cancelButton {
+                    .exitButton {
                         width: 75px;
                         height: 40px;
                         margin-right: 20px;
@@ -158,11 +164,11 @@
                         color: #ffffff;
                     }
 
-                    .cancelButton:focus {
+                    .exitButton:focus {
                         outline: none !important;
                     }
 
-                    .cancelButton:hover {
+                    .exitButton:hover {
                         background-color: #ff7f50;
                         cursor: pointer;
                     }

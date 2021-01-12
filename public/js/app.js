@@ -33094,6 +33094,9 @@ var Container = function Container() {
     value: inputText,
     onChange: function onChange(e) {
       return setInputText(e.target.value);
+    },
+    ref: function ref(input) {
+      return input && input.focus();
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_AddButton__WEBPACK_IMPORTED_MODULE_2__["default"], {
     onClick: handleSubmit
@@ -33156,44 +33159,18 @@ var DeleteButton = function DeleteButton(props) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 
 
 var EditButton = function EditButton(props) {
-  var buttonClick = function buttonClick(editing) {
-    props.onClick();
-    setEditing(editing);
-  };
-
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      editing = _useState2[0],
-      setEditing = _useState2[1];
-
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, !editing ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "button",
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, props.isEditing ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "submit",
+    className: "exitButton grow",
+    onClick: props.onClick
+  }, "Exit") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "submit",
     className: "editButton grow",
-    onClick: function onClick() {
-      return buttonClick(true);
-    }
-  }, "Edit") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "button",
-    className: "cancelButton grow",
-    onClick: function onClick() {
-      return buttonClick(false);
-    }
-  }, "Cancel"));
+    onClick: props.onClick
+  }, "Edit"));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (EditButton);
@@ -33247,6 +33224,16 @@ var Item = function Item(_ref) {
       inputText = _useState4[0],
       setInputText = _useState4[1];
 
+  var buttonClickHandler = function buttonClickHandler() {
+    setEditActive(!editActive);
+  };
+
+  var editFormHandler = function editFormHandler(e) {
+    edit(e, inputText, activity.id);
+    setInputText(e.target.value);
+    setEditActive(false);
+  };
+
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     setInputText(activity.activity_name);
   }, [activity]);
@@ -33259,16 +33246,19 @@ var Item = function Item(_ref) {
     className: "item",
     key: activity.id
   }, editActive ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-    onSubmit: function onSubmit(e) {
-      return edit(e, inputText, activity.id);
-    }
+    onSubmit: editFormHandler
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     className: "edit-input",
     value: inputText,
     onChange: function onChange(e) {
       return setInputText(e.target.value);
+    },
+    ref: function ref(input) {
+      return input && input.focus();
     }
-  })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "tip"
+  }, "Press \"Enter\" to update the task.")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: style
   }, activity.activity_name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "buttons"
@@ -33278,9 +33268,8 @@ var Item = function Item(_ref) {
     },
     checked: activity.checked
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_EditButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    onClick: function onClick() {
-      return setEditActive(true);
-    }
+    onClick: buttonClickHandler,
+    isEditing: editActive
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DeleteButton__WEBPACK_IMPORTED_MODULE_2__["default"], {
     onClick: function onClick() {
       return destroy(activity.id);
