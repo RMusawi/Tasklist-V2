@@ -25,6 +25,7 @@
     "dependencies": {
         "autoprefixer": "^9.8.0",
         "colorette": "^1.2.0",
+        "dateformat": "^4.4.1",
         "laravel-mix-react-typescript-extension": "^1.0.3",
         "react": "^17.0.1",
         "react-dom": "^17.0.1"

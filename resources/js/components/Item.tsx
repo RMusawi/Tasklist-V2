@@ -20,6 +20,8 @@ const Item: React.FunctionComponent<any> = ({activity, destroy, edit, check}) =>
         setInputText(activity.activity_name)
     },[activity])
 
+    let dateFormat = require("dateformat");
+
     let style = "todo-item " + (activity.checked ? 'checkbox-done' : 'checkbox-null');
 
     return (
@@ -47,6 +49,12 @@ const Item: React.FunctionComponent<any> = ({activity, destroy, edit, check}) =>
                 <DeleteButton
                     onClick={() => destroy(activity.id)}
                 />
+                <div className="tooltip">
+                    <div className="tooltipText">
+                        <p>Updated:  {dateFormat(activity.updated_at, "mmmm dS, yyyy")}</p>
+                    </div>
+                    <p className="tooltipLetter">i</p>
+                </div>
             </div>
         </div>
     )

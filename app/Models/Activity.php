@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Activity extends Model
 {
     use HasFactory;
-    protected $fillable = ['activity_name', 'checked'];
+    protected $fillable = ['activity_name', 'checked', 'created_at'];
 
     public function items() {
         return $this->hasMany(Item::class);

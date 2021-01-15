@@ -14,7 +14,7 @@ class ActivitiesController extends Controller
 
         $data = array(
             'activity_name' => $activity_name,
-            'checked' => $checked
+            'checked' => $checked,
         );
 
         $activity = Activity::create($data);
@@ -35,7 +35,7 @@ class ActivitiesController extends Controller
 
         return response()->json([
             'data' => $activities
-        ],);
+        ]);
     }
 
     public function update(Request $request, Activity $activity)

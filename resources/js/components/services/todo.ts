@@ -1,11 +1,6 @@
 import axios from "axios";
 
 const env = "http://127.0.0.1:8000/api/v1"
-
-const get = "/activities/:id";
-const post = "/activities";
-const edit = "/activities/";
-const destroy = "/activities";
 const check = "activities/check";
 
 export const getDataAxios = async() => {
@@ -22,7 +17,7 @@ export const getDataAxios = async() => {
 }
 
 export const postDataAxios = async(inputText) => {
-    const url = env + post;
+    const url = env + `/activities/`;
     return axios.post( url,
         {activity_name: inputText}
     )

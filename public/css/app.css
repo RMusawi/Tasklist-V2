@@ -117,7 +117,7 @@
 
 * .root .container .middle .checkAndItem .item .edit-input {
   background: none;
-  color: #002f6c;
+  color: coral;
   width: 100%;
   font-size: 25px;
   text-align: center;
@@ -199,6 +199,46 @@
 * .root .container .middle .buttons .deleteButton:hover {
   background-color: #9b0000;
   cursor: pointer;
+}
+
+* .root .container .middle .buttons .tooltip {
+  margin-left: 20px;
+  margin-top: 10px;
+  color: #424242;
+  background-color: #ffffff;
+  border: solid #424242;
+  border-radius: 20px;
+  width: 15px;
+  height: 15px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  cursor: default;
+}
+
+* .root .container .middle .buttons .tooltip .tooltipText {
+  position: absolute;
+  width: 200px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s;
+  z-index: 5;
+}
+
+* .root .container .middle .buttons .tooltip:hover .tooltipText {
+  visibility: visible;
+  opacity: 1;
+  background-color: #424242;
+  color: #ffffff;
+  border: solid #646464;
+  left: 40px;
+  bottom: -14px;
+}
+
+* .root .container .middle .buttons .tooltip .tooltipLetter {
+  font-weight: bold;
+  color: #424242;
+  z-index: 2;
 }
 
 * .stripe {

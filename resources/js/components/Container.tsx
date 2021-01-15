@@ -14,7 +14,6 @@ const Container: React.FunctionComponent<any> = () => {
         if (!inputText)
             alert("You didn't write anything :(");
         postDataAxios(inputText).then(() => {
-            console.log(inputText)
             setInputText("");
             getDataAxios().then((todos) => setActivities(todos))
         })
