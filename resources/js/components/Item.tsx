@@ -13,7 +13,6 @@ const Item: React.FunctionComponent<any> = ({activity, destroy, edit, check}) =>
 
     const editFormHandler = (e) => {
         edit(e, inputText, activity.id);
-        setInputText(e.target.value)
         setEditActive(false);
     }
     useEffect(() => {

@@ -29,17 +29,18 @@ class ActivitiesController extends Controller
         ],);
     }
 
-    public function index()
+    public function index(): \Illuminate\Http\JsonResponse
     {
-        $activities = Activity::with('items')->get();
+        $activities = Activity::get();
 
         return response()->json([
             'data' => $activities
         ]);
     }
 
-    public function update(Request $request, Activity $activity)
+    public function update(Request $request, Activity $activity): \Illuminate\Http\JsonResponse
     {
+        $checked = $request->boolean('checked');
         $activity->activity_name = $request->input('activity_name');
         $activity->save();
 
@@ -49,13 +50,14 @@ class ActivitiesController extends Controller
                 'type' => 'activities',
                 'message' => 'Update Success',
                 'id' => $activity->id,
-                'attributes' => '$activity',
-                'checked' => '$checked'
+                'attributes' => $activity,
+                'checked' => $checked
             ]
         ]);
     }
 
-    public function check(Request $request, Activity $activity) {
+    public function check(Request $request, Activity $activity): \Illuminate\Http\JsonResponse
+    {
         $activity->update([
             'checked' => $request->get('checked', false)
         ]);
@@ -65,20 +67,18 @@ class ActivitiesController extends Controller
         ]);
     }
 
-    public function show($activity_id)
+    public function show(Activity $activity): \Illuminate\Http\JsonResponse
     {
-        $activity = Activity::with('items')->find($activity_id);
-
         return response()->json([
             'data' => [
                 'type' => 'activities',
                 'message' => 'Success',
                 'attributes' => $activity
             ]
-        ],);
+        ]);
     }
 
-    public function destroy(Activity $activity)
+    public function destroy(Activity $activity): \Illuminate\Http\JsonResponse
     {
 
         $activity->delete();

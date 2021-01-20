@@ -33242,7 +33242,6 @@ var Item = function Item(_ref) {
 
   var editFormHandler = function editFormHandler(e) {
     edit(e, inputText, activity.id);
-    setInputText(e.target.value);
     setEditActive(false);
   };
 
